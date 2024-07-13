@@ -5,7 +5,7 @@ import  Jwt from "jsonwebtoken";
 
 export const singup = async(req,res) =>{
     console.log("this is enter in the controller")
-    const { username, email, password } = req.body;
+    const { username, email, password,userType } = req.body;
     try {
         const hashpassword = bcryptjs.hashSync(password, 10);
         console.log(hashpassword)
@@ -21,7 +21,8 @@ export const singup = async(req,res) =>{
         const newUser = await User.create({
             email: email,
             password: hashpassword,
-            username: username
+            username: username,
+            userType
         })
 
             res.status(200).json({ message: "User created successfully", data: newUser });
@@ -41,17 +42,20 @@ export const signin =async(req, res)=>{
        const vaildpassword = bcryptjs.compareSync(password,vaildUser.password);
       if(!vaildpassword)return res.status(400).json({ message: "pass  name not found"})
        
-      const token = Jwt.sign({id:vaildUser._id},process.env.JWT_SECRET);
+    //   const token = Jwt.sign({id:vaildUser._id},process.env.JWT_SECRET);
       return res.status(200).json({
           status: "success",
           data:{
-              token: token,
-              user: vaildUser
-          }
-      })
-
+            //   token: token,
+              user: vaildUser,
+            //   userType : userType
+            },
+            userType : vaildUser.userType
+        })
+        
     }
     catch(err){
-          console.log(err)
+        console.log(err)
     }
+    console.log(data);
 }
