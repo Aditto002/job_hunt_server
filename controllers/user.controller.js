@@ -1,6 +1,7 @@
 import bcryptjs from 'bcryptjs';
 import User from '../models/user.model.js';
 import { errorHandler } from '../utils/error.js';
+import JobPost from '../models/jobpost.model.js';
 
 export const test=((req,res) => {
     res.json({
@@ -46,3 +47,26 @@ export const updateUser =async(req,res)=>{
         console.log(error);
     }
 };
+//const post =post.save()
+//const user = await userModel.findById()
+//user.posts.push(post._id)
+
+//await user.save()
+
+/*
+    const admin = await userModel.findById(userId).populate("posts")
+ */
+
+
+/////jobs
+
+export const jobposts = async (req, res) => {
+    try {
+        const jobPosts = await JobPost.find();
+        res.status(200).json(jobPosts);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "Internal Server Error" });
+    }
+};
+
