@@ -29,6 +29,8 @@ export const updateUser =async(req,res)=>{
          )
          console.log(updateUser)
          res.status(200).json({
+            // status: "success",
+
              data: updatedUser
          });
          
@@ -57,16 +59,4 @@ export const updateUser =async(req,res)=>{
     const admin = await userModel.findById(userId).populate("posts")
  */
 
-
-/////jobs
-
-// export const jobposts = async (req, res) => {
-//     try {
-//         const jobPosts = await JobPost.find();
-//         res.status(200).json(jobPosts);
-//     } catch (error) {
-//         console.log(error);
-//         res.status(500).json({ message: "Internal Server Error" });
-//     }
-// };
 

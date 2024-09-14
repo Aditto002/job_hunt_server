@@ -9,6 +9,7 @@ const jobPostSchema = new mongoose.Schema({
   experience: { type: String, },
   qualifications: { type: String, required: true },
   description: { type: String, required: true },
+  admin: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
 }, { timestamps: true, versionKey: false });
 
 const JobPost = mongoose.model('JobPost', jobPostSchema);
