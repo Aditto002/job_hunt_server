@@ -10,8 +10,18 @@ const jobPostSchema = new mongoose.Schema({
   qualifications: { type: String, required: true },
   description: { type: String, required: true },
   admin: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  applied: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'AplliedJob'
+  }],
+  applied_user: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }]
 }, { timestamps: true, versionKey: false });
 
 const JobPost = mongoose.model('JobPost', jobPostSchema);
 
 export default JobPost;
+
+
