@@ -26,10 +26,13 @@ app.use(express.json());
 
 app.listen(3000,() => {
     console.log(
-        'server is listening on por 30000'
+        'server is listening on port 3000'
     );
 })
-
+/////////////////////////////////////////////////
+app.get('/success-payment', (req, res) => {
+    res.send("Payment was successful!");
+  });
 
 app.use("/api/user",userRoutes)
 app.use("/api/auth",authRouters)

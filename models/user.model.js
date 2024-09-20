@@ -15,9 +15,11 @@ import mongoose from "mongoose";
         // required:true,
        
     },
+    // phone:{
+    //     type:String,
+    // },
     userType:{
         type:String,
-         
     },
     profilePicture:{
         type: String,

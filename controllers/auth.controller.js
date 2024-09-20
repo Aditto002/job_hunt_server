@@ -50,7 +50,7 @@ export const singup = async (req, res) => {
         
             // Send email with OTP
             const emailMessage = `Your Verification Pin Code is: ${OTPCode}`;
-            const emailSubject = "Xplore Connect";
+            const emailSubject = "JobNest";
             const emailSend = await SendEmailUtils(email, emailMessage, emailSubject);
         
             newUser.password = undefined;
@@ -125,8 +125,20 @@ export const verifyEmail = async (req, res, next) => {
       
         user.isVerified = true;
         user.save();
+        let Payload = {
+          exp: Math.floor(Date.now() / 1000) + 24 * 60 * 60,
+          data: user,
+        };
+        let token = Jwt.sign(Payload, "aditto");
+
+        console.log(token)
   
-        res.status(200).json({ message: "Email verified successfully!" });
+        res.status(200).json({ message: "Email verified successfully!",
+          data: {
+            token: token,
+            user: user,
+        },
+         });
     } catch (err) {
         res.status(400).json({ message: "Invalid or expired token" });
         console.log(err.message);
